@@ -17,16 +17,18 @@ jobs:
           root: .
           paths:
             - site
+      - store_artifacts:
+          path: /tmp/ci_docs/site
 
   deploy:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: site
+          at: /tmp/website
       - run: pip install awscli
       #- run: echo $(pwd)
       #- run: echo $(ls)
-      - run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+      - run: aws s3 sync --dryrun /tmp/website/ s3://${DEPLOY_S3_BUCKET_NAME}/
 
 workflows:
   version: 2
