@@ -3,6 +3,15 @@ jobs:
   build:
     docker:
       - image: hassaku63/ci-docs_build_environment
+    working_directory: /tmp/ci_docs
     steps:
       - checkout
-      - run: echo "Hello world"
+      - run:  |
+        pip install awscli
+        mkdocs build
+  deploy:
+    docker:
+      - image: hassaku63/ci-docs_build_environment
+    working_directory: /tmp/ci_docs
+    steps:
+      - run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
