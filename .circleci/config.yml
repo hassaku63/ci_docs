@@ -24,9 +24,9 @@ jobs:
       - attach_workspace:
           at: site
       - run: pip install awscli
-      #- run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
-      - run: echo $(pwd)
-      - run: echo $(ls)
+      #- run: echo $(pwd)
+      #- run: echo $(ls)
+      - run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
 
 workflows:
   version: 2
