@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-job:
+  build:
     docker:
       - image: hassaku63/ci-docs_build_environment
     working_directory: /tmp/ci_docs
