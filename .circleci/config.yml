@@ -9,22 +9,20 @@ defaults: &defaults
 
 jobs:
   build:
-    docker:
-      - image: hassaku63/ci-docs_build_environment
-    working_directory: /tmp/ci_docs
-    environment:
-      - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
+    <<: *defaults
     steps:
       - checkout
       - run: mkdocs build
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - ci_docs
 
   deploy:
-    docker:
-      - image: hassaku63/ci-docs_build_environment
-    working_directory: /tmp/ci_docs
-    environment:
-      - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
+    <<: *defaults
     steps:
+      - attach_workspace:
+          at: site
       - run: pip install awscli
       #- run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
       - run: echo $(pwd)
