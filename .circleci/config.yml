@@ -18,7 +18,8 @@ jobs:
       - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
     steps:
       - run: pip install awscli
-      - run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+      #- run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+      - run: echo $(pwd)
 
 workflows:
   version: 2
