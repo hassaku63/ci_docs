@@ -8,8 +8,6 @@ jobs:
       - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
     steps:
       - checkout
-      - run: echo $DEPLOY_S3_BUCKET_NAME
-      - run: pip install awscli
       - run: mkdocs build
 
   deploy:
@@ -19,6 +17,7 @@ jobs:
     environment:
       - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
     steps:
+      - run: pip install awscli
       - run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
 
 workflows:
