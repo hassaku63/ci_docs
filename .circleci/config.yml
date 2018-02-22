@@ -7,11 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install awscli
-        command: pip install awscli
-      - run:
-        name: mkdocs build
-        command: mkdocs build
+        command: |
+          pip install awscli
+          command: mkdocs build
 
   deploy-job:
     docker:
