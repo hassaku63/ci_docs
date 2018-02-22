@@ -1,4 +1,12 @@
 version: 2
+
+defaults: &defaults
+  working_directory: /tmp/ci_docs
+  docker:
+    - image: hassaku63/ci-docs_build_environment
+  environment:
+    - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
+
 jobs:
   build:
     docker:
