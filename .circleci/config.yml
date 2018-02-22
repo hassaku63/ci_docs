@@ -4,12 +4,28 @@ jobs:
     docker:
       - image: hassaku63/ci-docs_build_environment
     working_directory: /tmp/ci_docs
+    environment:
+      - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
     steps:
       - checkout
-      - run:
-        command: |
-          pip install awscli
-          mkdocs build
+      - run: echo $DEPLOY_S3_BUCKET_NAME
+      - run: pip install awscli
+      - run: mkdocs build
+
+  deploy:
+    docker:
+      - image: hassaku63/ci-docs_build_environment
+    working_directory: /tmp/ci_docs
+    environment:
+      - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
+    steps:
+      - run: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
       - deploy:
-        name: (Dry run) Deploy to S3
-        command: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+          requirements:
+            - build
