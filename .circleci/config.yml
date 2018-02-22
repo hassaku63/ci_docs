@@ -9,6 +9,6 @@ jobs:
       - run:
         command: |
           pip install awscli
-          command: mkdocs build
+          mkdocs build
       - deploy:
         command: aws s3 sync --dryrun site/ s3://${DEPLOY_S3_BUCKET_NAME}/
