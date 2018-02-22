@@ -14,9 +14,9 @@ jobs:
       - checkout
       - run: mkdocs build
       - persist_to_workspace:
-          root: /tmp
+          root: .
           paths:
-            - ci_docs
+            - site
 
   deploy:
     <<: *defaults
