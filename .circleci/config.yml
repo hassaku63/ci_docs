@@ -16,7 +16,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - site/*
+            - site
       - store_artifacts:
           path: /tmp/ci_docs/site
 
@@ -28,7 +28,7 @@ jobs:
       - run: pip install awscli
       #- run: echo $(pwd)
       #- run: echo $(ls)
-      - run: aws s3 sync --dryrun /tmp/website/ s3://${DEPLOY_S3_BUCKET_NAME}/
+      - run: aws s3 sync  /tmp/website/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
 
 workflows:
   version: 2
