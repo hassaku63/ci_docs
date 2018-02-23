@@ -39,3 +39,10 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy_dev:
+          type: approval
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
