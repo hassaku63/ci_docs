@@ -2,6 +2,9 @@
 
 For full documentation visit [mkdocs.org](http://mkdocs.org).
 
+## hogehoge
+ci-docs.hassaku.net
+
 ## Commands
 
 * `mkdocs new [dir-name]` - Create a new project.
