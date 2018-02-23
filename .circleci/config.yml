@@ -34,7 +34,7 @@ jobs:
       - attach_workspace:
           at: /tmp/website
       - run: pip install awscli
-      - run: aws s3 sync --exact-timestamp --delete /tmp/website/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+      - run: aws s3 sync --dryrun --exact-timestamp --delete /tmp/website/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
       - run: echo ${SLACK_WEBHOOK_URL}
       #- run:
       #    command: |
