@@ -28,6 +28,14 @@ jobs:
       - run: pip install awscli
       - run: aws s3 sync --exact-timestamp --delete /tmp/website/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
 
+  dev_deploy_dry_run:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /tmp/website
+      - run: pip install awscli
+      - run: aws s3 sync --exact-timestamp --delete /tmp/website/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+
 workflows:
   version: 2
   build-deploy:
@@ -39,7 +47,7 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy_dev:
+      - dev_deploy_dry_run:
           type: approval
           requires:
             - build
