@@ -12,6 +12,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: echo $(ps aux)
       - run: mkdocs build
       - persist_to_workspace:
           root: .
