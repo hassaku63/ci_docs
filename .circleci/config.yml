@@ -54,7 +54,7 @@ workflows:
             branches:
               only: master
       - dev_deploy_dry_run:
-          #type: approval
+          type: approval
           requires:
             - build
           filters:
