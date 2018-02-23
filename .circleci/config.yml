@@ -12,7 +12,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: echo $(ps aux)
       - run: mkdocs build
       - persist_to_workspace:
           root: .
@@ -37,11 +36,11 @@ jobs:
       - run: pip install awscli
       - run: aws s3 sync --exact-timestamp --delete /tmp/website/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
       - run: echo ${SLACK_WEBHOOK_URL}
-      - run:
-          command: |
-            curl -X POST -H 'Content-type: application/json' \
-            --data "{\"text\": \"Please approve workflow from <https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}|here>.\"}" \
-            $SLACK_WEBHOOK_URL
+      #- run:
+      #    command: |
+      #      curl -X POST -H 'Content-type: application/json' \
+      #      --data "{\"text\": \"Please approve workflow from <https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}|here>.\"}" \
+      #      $SLACK_WEBHOOK_URL
 
 workflows:
   version: 2
