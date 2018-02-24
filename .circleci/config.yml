@@ -5,7 +5,7 @@ defaults: &defaults
   docker:
     - image: hassaku63/ci-docs_build_environment
   environment:
-    - DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
+    #- DEPLOY_S3_BUCKET_NAME: ci-docs.hassaku.net
 
 jobs:
   build:
