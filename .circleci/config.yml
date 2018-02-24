@@ -32,7 +32,6 @@ jobs:
     <<: *defaults
     steps:
       - run: echo ${SLACK_WEBHOOK_URL}
-      - run: echo $DEV_TESTENV
       - run:
           command: |
             curl -X POST -H 'Content-type: application/json' \
