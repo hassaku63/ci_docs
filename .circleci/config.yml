@@ -31,6 +31,7 @@ jobs:
   dev_deploy_approval:
     <<: *defaults
     steps:
+      - run: echo ${SLACK_WEBHOOK_URL}
       - run:
           command: |
             curl -X POST -H 'Content-type: application/json' \
@@ -44,12 +45,6 @@ jobs:
           at: /tmp/website
       - run: pip install awscli
       - run: aws s3 sync --dryrun --exact-timestamp --delete /tmp/website/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
-      - run: echo ${SLACK_WEBHOOK_URL}
-      #- run:
-      #    command: |
-      #      curl -X POST -H 'Content-type: application/json' \
-      #      --data "{\"text\": \"Please approve workflow from <https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}|here>.\"}" \
-      #      ${SLACK_WEBHOOK_URL}
 
 workflows:
   version: 2
