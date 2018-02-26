@@ -1,11 +1,16 @@
 site_author: hassaku63
-site_name: My Docs
+site_name: 手順書カイゼン
 repo_name: GitHub
 repo_url: https://github.com/hassaku63/ci_docs
-edit_url: docs
 
 docs_dir: docs
 site_dir: site
 
+use_directory_urls: false
+
 theme:
     name: material
+
+pages:
+  - Home: index.md
+  - "Qiita Post (2/25)": 20180225_qiita_blog.md
