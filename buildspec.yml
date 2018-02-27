@@ -1,3 +1,24 @@
 version: 0.2
 
 # https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/build-spec-ref.html
+#
+# デプロイ先のS3バケット名はParameter Storeを利用する
+#
+
+env:
+  variables:
+    DOCS_ROOT: /tmp/website
+  parameter-store:
+    DEPLOY_S3_BUCKET_NAME: CI_DOCS_CODEBUILD_DEPLOY_BUCKET
+
+phases:
+  install:
+    commands:
+      - pip install awscli
+  build:
+    commands:
+      - mkdocs build
+  post_build:
+    commands:
+      - mv site/ ${DOCS_ROOT}/
+      - aws s3 sync --exact-timestamp --delete ${DOCS_ROOT}/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
