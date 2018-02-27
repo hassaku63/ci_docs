@@ -51,7 +51,7 @@ workflows:
       - build:
           filters:
             only:
-              - master
+              #- master
               - develop
       - deploy:
           requires:
