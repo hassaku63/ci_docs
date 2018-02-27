@@ -6,8 +6,8 @@ version: 0.2
 #
 
 env:
-  variables:
-    DOCS_ROOT: /tmp/website
+  #variables:
+  #  DOCS_ROOT: /tmp/website
   parameter-store:
     DEPLOY_S3_BUCKET_NAME: CI_DOCS_CODEBUILD_DEPLOY_BUCKET
 
@@ -20,5 +20,5 @@ phases:
       - mkdocs build
   post_build:
     commands:
-      - mv site/ ${DOCS_ROOT}/
-      - aws s3 sync --exact-timestamp --delete ${DOCS_ROOT}/site/ s3://${DEPLOY_S3_BUCKET_NAME}/
+      #- mv site/ ${DOCS_ROOT}/
+      - aws s3 sync --exact-timestamp --delete site/ s3://${DEPLOY_S3_BUCKET_NAME}/
