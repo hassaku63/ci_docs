@@ -21,4 +21,5 @@ phases:
   post_build:
     commands:
       #- mv site/ ${DOCS_ROOT}/
+      - echo s3://${DEPLOY_S3_BUCKET_NAME}
       - aws s3 sync --exact-timestamp --delete site/ s3://${DEPLOY_S3_BUCKET_NAME}/
